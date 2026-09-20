@@ -1,1 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Reports page for the accessible enterprise dashboard."
+    >
+    <title>Reports - Enterprise Dashboard</title>
+</head>
 
+<body>
+
+    <header>
+        <nav aria-label="Primary navigation">
+            <a href="../index.html">Enterprise Dashboard</a>
+
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="reports.html" aria-current="page">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside aria-label="Sidebar navigation">
+        <h2>Quick Navigation</h2>
+
+        <nav aria-label="Sidebar">
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="#report-form">Reports</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section aria-labelledby="reports-heading">
+            <h1 id="reports-heading">Reports</h1>
+
+            <article>
+                <h2>Generate a Report</h2>
+
+                <form id="report-form" action="#" method="post">
+
+                    <fieldset>
+                        <legend>Report Information</legend>
+
+                        <p>
+                            <label for="report-name">Report Name</label>
+                            <input
+                                type="text"
+                                id="report-name"
+                                name="report-name"
+                                required
+                                minlength="3"
+                            >
+                        </p>
+
+                        <p>
+                            <label for="report-type">Report Type</label>
+                            <select
+                                id="report-type"
+                                name="report-type"
+                                required
+                            >
+                                <option value="">Select a report type</option>
+                                <option value="monthly">Monthly Report</option>
+                                <option value="annual">Annual Report</option>
+                                <option value="custom">Custom Report</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <label for="report-date">Report Date</label>
+                            <input
+                                type="date"
+                                id="report-date"
+                                name="report-date"
+                                required
+                            >
+                        </p>
+
+                        <button type="submit">Generate Report</button>
+                    </fieldset>
+
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Enterprise Dashboard. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
