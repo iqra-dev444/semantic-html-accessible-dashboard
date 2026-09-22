@@ -1,1 +1,57 @@
+<form action="#" method="post">
+    <fieldset>
+        <legend>Report Information</legend>
 
+        <p>
+            <label for="report-name">Report Name</label>
+            <input
+                type="text"
+                id="report-name"
+                name="report-name"
+                required
+                minlength="3"
+                aria-label="Report Name"
+            >
+        </p>
+
+        <p>
+            <label for="report-email">Email Address</label>
+            <input
+                type="email"
+                id="report-email"
+                name="report-email"
+                required
+                autocomplete="email"
+                aria-label="Email Address"
+            >
+        </p>
+
+        <p>
+            <label for="report-type">Report Type</label>
+            <select
+                id="report-type"
+                name="report-type"
+                required
+                aria-label="Report Type"
+            >
+                <option value="">Select a report type</option>
+                <option value="monthly">Monthly Report</option>
+                <option value="annual">Annual Report</option>
+                <option value="custom">Custom Report</option>
+            </select>
+        </p>
+
+        <p>
+            <label for="report-date">Report Date</label>
+            <input
+                type="date"
+                id="report-date"
+                name="report-date"
+                required
+                aria-label="Report Date"
+            >
+        </p>
+
+        <button type="submit">Generate Report</button>
+    </fieldset>
+</form>
