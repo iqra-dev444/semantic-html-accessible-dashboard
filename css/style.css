@@ -120,14 +120,12 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-
-    /* Prevent horizontal scrolling */
     overflow-x: hidden;
 
     display: grid;
 
     /*
-       Mobile:
+       Mobile layout:
        Header
        Sidebar
        Main
@@ -284,17 +282,18 @@ main {
 
     width: 100%;
     max-width: var(--content-max-width);
-
     min-width: 0;
 
     margin: 0 auto;
     padding: var(--space-4);
 
     display: grid;
-
     grid-template-columns: minmax(0, 1fr);
 
     gap: var(--space-5);
+
+    /* Prevent the grid item from being forced smaller */
+    align-self: start;
 }
 
 main > section {
@@ -466,17 +465,26 @@ button:hover {
 
 
 /* =========================================
-   DIALOG / MODAL
+   DIALOG / INFORMATION BOX
    ========================================= */
 
 dialog {
-    width: min(500px, calc(100vw - 2rem));
+    /*
+       Make the dialog behave like a normal
+       content block because index.html uses
+       the open attribute.
+    */
+    display: block;
+    position: static;
 
-    max-width: calc(100vw - 2rem);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
-    max-height: calc(100vh - 2rem);
+    height: auto;
+    max-height: none;
 
-    margin: auto;
+    margin: 0;
 
     padding: var(--space-5);
 
@@ -488,12 +496,11 @@ dialog {
 
     box-shadow: var(--shadow-lg);
 
-    overflow: auto;
+    overflow: visible;
 }
 
 dialog::backdrop {
     background: rgba(15, 23, 42, 0.55);
-
     backdrop-filter: blur(4px);
 }
 
@@ -509,6 +516,8 @@ dialog button {
 footer {
     grid-column: 1 / -1;
 
+    width: 100%;
+
     padding: var(--space-5);
 
     text-align: center;
@@ -520,6 +529,13 @@ footer {
 
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
+
+    /* Footer must stay after main content */
+    align-self: start;
+}
+
+footer p {
+    margin: 0;
 }
 
 
@@ -548,8 +564,8 @@ footer {
     }
 
     dialog {
-        width: calc(100vw - 2rem);
-        max-width: calc(100vw - 2rem);
+        width: 100%;
+        max-width: 100%;
     }
 }
 
@@ -586,6 +602,11 @@ footer {
     main > section {
         padding: var(--space-5);
     }
+
+    dialog {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 
@@ -600,7 +621,7 @@ footer {
             var(--sidebar-width) minmax(0, 1fr);
 
         grid-template-rows:
-            auto 1fr auto;
+            auto auto auto;
     }
 
     header {
@@ -634,6 +655,11 @@ footer {
     footer {
         grid-column: 1 / -1;
         grid-row: 3;
+    }
+
+    dialog {
+        width: 100%;
+        max-width: 100%;
     }
 }
 
