@@ -54,8 +54,9 @@
     --content-max-width: 1600px;
 }
 
+
 /* =========================================
-   DARK THEME VARIABLES
+   DARK THEME
    ========================================= */
 
 @media (prefers-color-scheme: dark) {
@@ -73,7 +74,11 @@
     }
 }
 
-/* Optional manual theme support */
+
+/* =========================================
+   MANUAL DARK THEME
+   ========================================= */
+
 html[data-theme="dark"] {
     --color-bg: #0f172a;
     --color-surface: rgba(30, 41, 59, 0.78);
@@ -83,6 +88,11 @@ html[data-theme="dark"] {
     --color-border: rgba(148, 163, 184, 0.2);
 }
 
+
+/* =========================================
+   MANUAL LIGHT THEME
+   ========================================= */
+
 html[data-theme="light"] {
     --color-bg: #f4f7fb;
     --color-surface: rgba(255, 255, 255, 0.82);
@@ -91,6 +101,7 @@ html[data-theme="light"] {
     --color-text-muted: #64748b;
     --color-border: rgba(148, 163, 184, 0.25);
 }
+
 
 /* =========================================
    RESET
@@ -109,9 +120,19 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
+
+    /* Prevent horizontal scrolling */
     overflow-x: hidden;
 
     display: grid;
+
+    /*
+       Mobile:
+       Header
+       Sidebar
+       Main
+       Footer
+    */
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
 
@@ -122,6 +143,7 @@ body {
     background: var(--color-bg);
     color: var(--color-text);
 }
+
 img,
 svg,
 video {
@@ -146,6 +168,7 @@ a:hover {
     color: var(--color-primary-hover);
 }
 
+
 /* =========================================
    HEADER
    ========================================= */
@@ -162,6 +185,7 @@ header {
     -webkit-backdrop-filter: var(--blur);
 
     box-shadow: var(--shadow-sm);
+
     position: sticky;
     top: 0;
     z-index: 100;
@@ -185,9 +209,11 @@ header nav ul {
 
 header nav a {
     display: block;
+
     padding: var(--space-2) var(--space-3);
 
     border-radius: var(--radius-md);
+
     transition:
         background var(--transition),
         color var(--transition),
@@ -198,6 +224,7 @@ header nav a:hover {
     background: rgba(37, 99, 235, 0.1);
     transform: translateY(-1px);
 }
+
 
 /* =========================================
    SIDEBAR
@@ -232,6 +259,7 @@ aside li {
 
 aside a {
     display: block;
+
     padding: var(--space-2) var(--space-3);
 
     border-radius: var(--radius-md);
@@ -246,6 +274,7 @@ aside a:hover {
     transform: translateX(3px);
 }
 
+
 /* =========================================
    MAIN CONTENT
    ========================================= */
@@ -255,22 +284,26 @@ main {
 
     width: 100%;
     max-width: var(--content-max-width);
+
     min-width: 0;
 
     margin: 0 auto;
-    padding: var(--space-5);
+    padding: var(--space-4);
 
     display: grid;
-    grid-template-columns: 1fr;
+
+    grid-template-columns: minmax(0, 1fr);
+
     gap: var(--space-5);
 }
 
 main > section {
     min-width: 0;
 
-    padding: var(--space-5);
+    padding: var(--space-4);
 
     background: var(--color-surface);
+
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
 
@@ -298,6 +331,7 @@ main h3 {
     font-size: var(--font-size-lg);
 }
 
+
 /* =========================================
    TABLE
    ========================================= */
@@ -305,12 +339,14 @@ main h3 {
 table {
     width: 100%;
     max-width: 100%;
+
     border-collapse: collapse;
     table-layout: fixed;
 }
 
 caption {
     margin-bottom: var(--space-3);
+
     font-weight: bold;
     text-align: left;
 }
@@ -318,7 +354,9 @@ caption {
 th,
 td {
     padding: var(--space-3);
+
     text-align: left;
+
     border-bottom: 1px solid var(--color-border);
 
     overflow-wrap: anywhere;
@@ -337,6 +375,7 @@ tbody tr:hover {
     background: rgba(37, 99, 235, 0.06);
 }
 
+
 /* =========================================
    FORMS
    ========================================= */
@@ -348,6 +387,7 @@ form {
 
 fieldset {
     min-width: 0;
+
     margin: 0;
     padding: var(--space-4);
 
@@ -362,7 +402,9 @@ legend {
 
 label {
     display: block;
+
     margin-bottom: var(--space-2);
+
     font-weight: 600;
 }
 
@@ -389,7 +431,9 @@ input:focus,
 textarea:focus,
 select:focus {
     border-color: var(--color-primary);
+
     outline: none;
+
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
@@ -414,9 +458,12 @@ button {
 
 button:hover {
     background: var(--color-primary-hover);
+
     transform: translateY(-1px);
+
     box-shadow: var(--shadow-sm);
 }
+
 
 /* =========================================
    DIALOG / MODAL
@@ -424,9 +471,13 @@ button:hover {
 
 dialog {
     width: min(500px, calc(100vw - 2rem));
-    max-width: 100%;
 
-    margin: 0;
+    max-width: calc(100vw - 2rem);
+
+    max-height: calc(100vh - 2rem);
+
+    margin: auto;
+
     padding: var(--space-5);
 
     color: var(--color-text);
@@ -437,26 +488,19 @@ dialog {
 
     box-shadow: var(--shadow-lg);
 
-    z-index: 1000;
-}
-
-/* Keep open dialog centered on mobile and desktop */
-dialog[open] {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    overflow: auto;
 }
 
 dialog::backdrop {
     background: rgba(15, 23, 42, 0.55);
+
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
 }
 
 dialog button {
     margin-top: var(--space-4);
 }
+
 
 /* =========================================
    FOOTER
@@ -471,11 +515,13 @@ footer {
 
     color: var(--color-text-muted);
     background: var(--color-surface);
+
     border-top: 1px solid var(--color-border);
 
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
 }
+
 
 /* =========================================
    ACCESSIBLE FOCUS
@@ -486,11 +532,13 @@ footer {
     outline-offset: 3px;
 }
 
+
 /* =========================================
    320px BREAKPOINT
    ========================================= */
 
 @media (min-width: 320px) {
+
     main {
         padding: var(--space-4);
     }
@@ -498,13 +546,20 @@ footer {
     main > section {
         padding: var(--space-4);
     }
+
+    dialog {
+        width: calc(100vw - 2rem);
+        max-width: calc(100vw - 2rem);
+    }
 }
+
 
 /* =========================================
    768px TABLET BREAKPOINT
    ========================================= */
 
 @media (min-width: 768px) {
+
     header {
         padding: var(--space-5) var(--space-6);
     }
@@ -520,7 +575,8 @@ footer {
     main {
         padding: var(--space-6);
 
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
     }
 
     main > section:first-child {
@@ -532,18 +588,24 @@ footer {
     }
 }
 
+
 /* =========================================
    1024px DESKTOP BREAKPOINT
    ========================================= */
 
 @media (min-width: 1024px) {
+
     body {
-        grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-        grid-template-rows: auto 1fr auto;
+        grid-template-columns:
+            var(--sidebar-width) minmax(0, 1fr);
+
+        grid-template-rows:
+            auto 1fr auto;
     }
 
     header {
         grid-column: 1 / -1;
+        grid-row: 1;
     }
 
     aside {
@@ -551,11 +613,13 @@ footer {
         grid-row: 2;
 
         min-height: 100%;
+
         border-right: 1px solid var(--color-border);
         border-bottom: 0;
 
         position: sticky;
         top: 80px;
+
         align-self: start;
     }
 
@@ -563,7 +627,8 @@ footer {
         grid-column: 2;
         grid-row: 2;
 
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
     }
 
     footer {
@@ -572,14 +637,19 @@ footer {
     }
 }
 
+
 /* =========================================
-   1440px LARGE DESKTOP BREAKPOINT
+   1440px LARGE DESKTOP
    ========================================= */
 
 @media (min-width: 1440px) {
+
     main {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
         padding: var(--space-7);
+
         gap: var(--space-6);
     }
 
@@ -588,17 +658,22 @@ footer {
     }
 }
 
+
 /* =========================================
    REDUCED MOTION
    ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
         scroll-behavior: auto !important;
+
         transition-duration: 0.01ms !important;
+
         animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
     }
 }
