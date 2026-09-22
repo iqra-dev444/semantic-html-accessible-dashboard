@@ -3,32 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta
         name="description"
         content="Accessible enterprise dashboard built with semantic HTML5."
     >
+
     <title>Enterprise Dashboard</title>
+
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
 
     <header>
         <nav aria-label="Primary navigation">
+
             <a href="index.html" aria-label="Go to Dashboard">
                 Enterprise Dashboard
             </a>
 
             <ul>
-                <li><a href="index.html" aria-current="page">Dashboard</a></li>
-                <li><a href="pages/users.html">Users</a></li>
-                <li><a href="pages/reports.html">Reports</a></li>
+                <li>
+                    <a href="index.html" aria-current="page">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pages/users.html">
+                        Users
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pages/reports.html">
+                        Reports
+                    </a>
+                </li>
             </ul>
+
         </nav>
     </header>
 
+
     <aside aria-label="Sidebar navigation">
+
         <h2>Quick Navigation</h2>
 
         <nav aria-label="Sidebar">
@@ -39,27 +60,51 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+
     </aside>
+
 
     <main id="main-content">
 
-        <section id="overview" aria-labelledby="overview-heading">
-            <h1 id="overview-heading">Dashboard Overview</h1>
+        <!-- Dashboard Overview -->
+        <section
+            id="overview"
+            aria-labelledby="overview-heading"
+        >
+
+            <h1 id="overview-heading">
+                Dashboard Overview
+            </h1>
 
             <article>
+
                 <h2>Welcome</h2>
+
                 <p>
                     This dashboard demonstrates a semantic HTML5 structure
                     with accessible navigation, forms, tables, and dialogs.
                 </p>
+
             </article>
+
         </section>
 
-        <section id="users" aria-labelledby="users-heading">
-            <h2 id="users-heading">User Information</h2>
+
+        <!-- Users -->
+        <section
+            id="users"
+            aria-labelledby="users-heading"
+        >
+
+            <h2 id="users-heading">
+                User Information
+            </h2>
 
             <table>
-                <caption>Registered Users</caption>
+
+                <caption>
+                    Registered Users
+                </caption>
 
                 <thead>
                     <tr>
@@ -70,6 +115,7 @@
                 </thead>
 
                 <tbody>
+
                     <tr>
                         <td>Sarah Khan</td>
                         <td>sarah@example.com</td>
@@ -81,79 +127,133 @@
                         <td>john@example.com</td>
                         <td>Manager</td>
                     </tr>
+
                 </tbody>
+
             </table>
+
         </section>
 
-        <section id="reports" aria-labelledby="reports-heading">
-            <h2 id="reports-heading">Generate Report</h2>
+
+        <!-- Reports -->
+        <section
+            id="reports"
+            aria-labelledby="reports-heading"
+        >
+
+            <h2 id="reports-heading">
+                Generate Report
+            </h2>
 
             <form action="#" method="post">
 
                 <fieldset>
-                    <legend>Report Information</legend>
+
+                    <legend>
+                        Report Information
+                    </legend>
 
                     <p>
-                        <label for="report-name">Report Name</label>
+                        <label for="report-name">
+                            Report Name
+                        </label>
+
                         <input
                             type="text"
                             id="report-name"
                             name="report-name"
                             required
                             minlength="3"
-                            aria-label="Report Name"
                         >
                     </p>
 
+
                     <p>
-                        <label for="report-email">Email Address</label>
+                        <label for="report-email">
+                            Email Address
+                        </label>
+
                         <input
                             type="email"
                             id="report-email"
                             name="report-email"
                             required
                             autocomplete="email"
-                            aria-label="Email Address"
                         >
                     </p>
 
+
                     <p>
-                        <label for="report-type">Report Type</label>
+                        <label for="report-type">
+                            Report Type
+                        </label>
+
                         <select
                             id="report-type"
                             name="report-type"
                             required
-                            aria-label="Report Type"
                         >
-                            <option value="">Select a report type</option>
-                            <option value="monthly">Monthly Report</option>
-                            <option value="annual">Annual Report</option>
-                            <option value="custom">Custom Report</option>
+
+                            <option value="">
+                                Select a report type
+                            </option>
+
+                            <option value="monthly">
+                                Monthly Report
+                            </option>
+
+                            <option value="annual">
+                                Annual Report
+                            </option>
+
+                            <option value="custom">
+                                Custom Report
+                            </option>
+
                         </select>
+
                     </p>
 
+
                     <p>
-                        <label for="report-date">Report Date</label>
+                        <label for="report-date">
+                            Report Date
+                        </label>
+
                         <input
                             type="date"
                             id="report-date"
                             name="report-date"
                             required
-                            aria-label="Report Date"
                         >
                     </p>
 
-                    <button type="submit">Generate Report</button>
+
+                    <button type="submit">
+                        Generate Report
+                    </button>
+
                 </fieldset>
 
             </form>
+
         </section>
 
-        <section id="contact" aria-labelledby="contact-heading">
-            <h2 id="contact-heading">Contact Support</h2>
+
+        <!-- Contact -->
+        <section
+            id="contact"
+            aria-labelledby="contact-heading"
+        >
+
+            <h2 id="contact-heading">
+                Contact Support
+            </h2>
 
             <article>
+
                 <h3>Need Help?</h3>
+
                 <p>
                     Contact the support team for assistance with your dashboard.
                 </p>
@@ -161,28 +261,69 @@
                 <a href="mailto:support@example.com">
                     Email Support
                 </a>
+
             </article>
+
         </section>
 
-        <section aria-labelledby="dialog-heading">
-            <h2 id="dialog-heading">Information Dialog</h2>
 
-            <dialog open aria-labelledby="dialog-title">
-                <h2 id="dialog-title">Dashboard Information</h2>
+        <!-- Accessible Dialog -->
+        <section
+            aria-labelledby="dialog-heading"
+        >
+
+            <h2 id="dialog-heading">
+                Information Dialog
+            </h2>
+
+            <p>
+                Open the dialog to view additional dashboard information.
+            </p>
+
+            <button
+                type="button"
+                id="open-dialog"
+                aria-haspopup="dialog"
+            >
+                Open Information Dialog
+            </button>
+
+
+            <dialog
+                id="info-dialog"
+                aria-labelledby="dialog-title"
+            >
+
+                <h2 id="dialog-title">
+                    Dashboard Information
+                </h2>
 
                 <p>
                     This is an accessible HTML5 dialog element used to
                     demonstrate a modal-style component.
                 </p>
 
-                <button type="button">Close</button>
+                <button
+                    type="button"
+                    id="close-dialog"
+                >
+                    Close
+                </button>
+
             </dialog>
+
         </section>
 
     </main>
 
+
     <footer>
-        <p>&copy; 2026 Enterprise Dashboard. All rights reserved.</p>
+
+        <p>
+            &copy; 2026 Enterprise Dashboard.
+            All rights reserved.
+        </p>
+
     </footer>
 
 </body>
