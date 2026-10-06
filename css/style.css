@@ -60,6 +60,7 @@
    ========================================= */
 
 @media (prefers-color-scheme: dark) {
+
     :root {
         --color-bg: #0f172a;
         --color-surface: rgba(30, 41, 59, 0.78);
@@ -133,6 +134,7 @@ body {
     background: var(--color-bg);
     color: var(--color-text);
 }
+
 img,
 svg,
 video {
@@ -283,7 +285,6 @@ main {
 
     gap: var(--space-5);
 
-    /* Prevent the grid item from being forced smaller */
     align-self: start;
 }
 
@@ -460,9 +461,12 @@ button:hover {
    ========================================= */
 
 dialog {
+    position: static;
+
     width: min(500px, calc(100vw - 2rem));
     max-width: 100%;
 
+    margin: 0;
     padding: var(--space-5);
 
     color: var(--color-text);
@@ -472,6 +476,8 @@ dialog {
     border-radius: var(--radius-lg);
 
     box-shadow: var(--shadow-lg);
+
+    box-sizing: border-box;
 }
 
 dialog::backdrop {
@@ -482,6 +488,7 @@ dialog::backdrop {
 dialog button {
     margin-top: var(--space-4);
 }
+
 
 /* =========================================
    FOOTER
@@ -504,7 +511,6 @@ footer {
     backdrop-filter: var(--blur);
     -webkit-backdrop-filter: var(--blur);
 
-    /* Footer must stay after main content */
     align-self: start;
 }
 
