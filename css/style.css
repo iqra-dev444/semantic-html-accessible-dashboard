@@ -123,10 +123,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-
     font-family: var(--font-family);
     font-size: var(--font-size-md);
     line-height: 1.6;
@@ -134,7 +130,6 @@ body {
     background: var(--color-bg);
     color: var(--color-text);
 }
-
 img,
 svg,
 video {
@@ -165,8 +160,6 @@ a:hover {
    ========================================= */
 
 header {
-    grid-column: 1 / -1;
-
     padding: var(--space-4);
 
     background: var(--color-surface);
@@ -217,13 +210,10 @@ header nav a:hover {
 }
 
 
-/* =========================================
-   SIDEBAR
-   ========================================= */
+/*   SIDEBAR   */
+  
 
 aside {
-    grid-column: 1;
-
     padding: var(--space-4);
 
     background: var(--color-surface);
@@ -271,8 +261,6 @@ aside a:hover {
    ========================================= */
 
 main {
-    grid-column: 1;
-
     width: 100%;
     max-width: var(--content-max-width);
     min-width: 0;
@@ -323,10 +311,7 @@ main h3 {
 }
 
 
-/* =========================================
-   TABLE
-   ========================================= */
-
+  /* TABLE*/ 
 table {
     width: 100%;
     max-width: 100%;
@@ -495,9 +480,7 @@ dialog button {
    ========================================= */
 
 footer {
-    grid-column: 1 / -1;
-
-    width: 100%;
+     width: 100%;
 
     padding: var(--space-5);
 
@@ -597,6 +580,8 @@ footer p {
 @media (min-width: 1024px) {
 
     body {
+        display: grid;
+
         grid-template-columns:
             var(--sidebar-width) minmax(0, 1fr);
 
