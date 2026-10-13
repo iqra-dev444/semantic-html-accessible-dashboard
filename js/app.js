@@ -25,31 +25,35 @@ async function startApp() {
 
     function displayUsers() {
         const searchText = searchInput.value.trim().toLowerCase();
+
         let filteredUsers = demoUsers.filter((user) =>
             user.name.toLowerCase().includes(searchText) ||
             user.email.toLowerCase().includes(searchText)
         );
 
         if (sortSelect.value === "az") {
-            filteredUsers.sort((a, b) => a.name.localeCompare(b.name));
+            filteredUsers.sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
         } else if (sortSelect.value === "za") {
-            filteredUsers.sort((a, b) => b.name.localeCompare(a.name));
+            filteredUsers.sort((a, b) =>
+                b.name.localeCompare(a.name)
+            );
         }
 
         usersList.replaceChildren();
-
-        if (filteredUsers.length === 0) {
-            const item = document.createElement("li");
-            item.textContent = "No users found.";
-            usersList.appendChild(item);
-            return;
-        }
 
         filteredUsers.forEach((user) => {
             const item = document.createElement("li");
             item.textContent = `${user.name} — ${user.email}`;
             usersList.appendChild(item);
         });
+
+        if (filteredUsers.length === 0) {
+            const item = document.createElement("li");
+            item.textContent = "No users found.";
+            usersList.appendChild(item);
+        }
     }
 
     try {
@@ -64,7 +68,7 @@ async function startApp() {
     } catch (error) {
         loadingMessage.textContent =
             "Unable to load users. Please refresh the page.";
-        console.error("Something went wrong:", error);
+        console.error(error);
     }
 }
 
