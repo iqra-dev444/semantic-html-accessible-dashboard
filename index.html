@@ -56,6 +56,14 @@
                 placeholder="Search by name or email..."
                 aria-label="Search users by name or email"
             >
+            
+            <label for="user-sort">Sort users:</label>
+            <select id="user-sort">
+                <option value="default">Default order</option>
+                <option value="az">Name (A–Z)</option>
+                <option value="za">Name (Z–A)</option>
+            </select>
+
             <p id="loading-message" role="status">Loading users...</p>
             <ul id="users-list"></ul>
         </section>
