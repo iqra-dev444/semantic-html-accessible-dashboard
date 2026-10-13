@@ -1,17 +1,4 @@
 
-const demoUsers = [
-    { name: "Rahul Sharma", email: "rahul.sharma@example.com" },
-    { name: "Priya Singh", email: "priya.singh@example.com" },
-    { name: "Aman Verma", email: "aman.verma@example.com" },
-    { name: "Neha Gupta", email: "neha.gupta@example.com" },
-    { name: "Arjun Kumar", email: "arjun.kumar@example.com" },
-    { name: "Pooja Mishra", email: "pooja.mishra@example.com" },
-    { name: "Ravi Yadav", email: "ravi.yadav@example.com" },
-    { name: "Anjali Patel", email: "anjali.patel@example.com" },
-    { name: "Rohit Singh", email: "rohit.singh@example.com" },
-    { name: "Sneha Verma", email: "sneha.verma@example.com" }
-];
-
 async function startApp() {
     const usersList = document.getElementById("users-list");
     const loadingMessage = document.getElementById("loading-message");
@@ -21,6 +8,19 @@ async function startApp() {
     if (!usersList || !loadingMessage || !searchInput || !sortSelect) {
         console.error("A required HTML element is missing.");
         return;
+    }
+
+    let users = [];
+
+    // Load saved users from localStorage
+    try {
+        const savedUsers = localStorage.getItem("dashboardUsers");
+
+        if (savedUsers) {
+            users = JSON.parse(savedUsers);
+        }
+    } catch (error) {
+        console.error("Could not read saved users:", error);
     }
 
     function displayUsers() {
@@ -43,32 +43,62 @@ async function startApp() {
 
         usersList.replaceChildren();
 
+        if (filteredUsers.length === 0) {
+            const item = document.createElement("li");
+            item.textContent = "No users found.";
+            usersList.appendChild(item);
+            return;
+        }
+
         filteredUsers.forEach((user) => {
             const item = document.createElement("li");
             item.textContent = `${user.name} — ${user.email}`;
             usersList.appendChild(item);
         });
+    }
 
-        if (filteredUsers.length === 0) {
-            const item = document.createElement("li");
-            item.textContent = "No users found.";
-            usersList.appendChild(item);
-        }
+    searchInput.addEventListener("input", displayUsers);
+    sortSelect.addEventListener("change", displayUsers);
+
+    // Show saved data immediately, if available
+    if (users.length > 0) {
+        displayUsers();
     }
 
     try {
         loadingMessage.textContent = "Loading users...";
-        const users = await fetchUsers();
+
+        const apiUsers = await fetchUsers();
+
+        users = apiUsers.map((user) => ({
+            name: user.name,
+            email: user.email
+        }));
+
+        // Save API users
+        try {
+            localStorage.setItem(
+                "dashboardUsers",
+                JSON.stringify(users)
+            );
+        } catch (error) {
+            console.error("Could not save users:", error);
+        }
 
         displayUsers();
         loadingMessage.textContent = "";
 
-        searchInput.addEventListener("input", displayUsers);
-        sortSelect.addEventListener("change", displayUsers);
     } catch (error) {
-        loadingMessage.textContent =
-            "Unable to load users. Please refresh the page.";
-        console.error(error);
+        console.error("Failed to load users:", error);
+
+        if (users.length > 0) {
+            displayUsers();
+            loadingMessage.textContent =
+                "Unable to refresh users. Showing saved data.";
+        } else {
+            loadingMessage.textContent =
+                "Unable to load users. Please check your connection and refresh.";
+        }
     }
 }
 
