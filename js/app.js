@@ -26,7 +26,7 @@ async function startApp() {
     function displayUsers() {
         const searchText = searchInput.value.trim().toLowerCase();
 
-        let filteredUsers = demoUsers.filter((user) =>
+        let filteredUsers = users.filter((user) =>
             user.name.toLowerCase().includes(searchText) ||
             user.email.toLowerCase().includes(searchText)
         );
@@ -58,7 +58,7 @@ async function startApp() {
 
     try {
         loadingMessage.textContent = "Loading users...";
-        await fetchUsers();
+        const users = await fetchUsers();
 
         displayUsers();
         loadingMessage.textContent = "";
