@@ -1,4 +1,3 @@
-
 const demoUsers = [
     { name: "Rahul Sharma", email: "rahul.sharma@example.com" },
     { name: "Priya Singh", email: "priya.singh@example.com" },
@@ -17,26 +16,38 @@ async function startApp() {
     const loadingMessage = document.getElementById("loading-message");
     const searchInput = document.getElementById("user-search");
 
+    if (!usersList || !loadingMessage || !searchInput) {
+        console.error("A required HTML element is missing.");
+        return;
+    }
+
+    function displayUsers(users) {
+        usersList.replaceChildren();
+
+        if (users.length === 0) {
+            const item = document.createElement("li");
+            item.textContent = "No users found.";
+            usersList.appendChild(item);
+            return;
+        }
+
+        users.forEach((user) => {
+            const item = document.createElement("li");
+            item.textContent = `${user.name} — ${user.email}`;
+            usersList.appendChild(item);
+        });
+    }
+
     try {
         loadingMessage.textContent = "Loading users...";
 
         await fetchUsers();
 
-        function displayUsers(users) {
-            usersList.replaceChildren();
-
-            users.forEach((user) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = `${user.name} — ${user.email}`;
-                usersList.appendChild(listItem);
-            });
-        }
-
         displayUsers(demoUsers);
         loadingMessage.textContent = "";
 
-        searchInput.addEventListener("input", () => {
-            const searchText = searchInput.value.toLowerCase();
+        searchInput.addEventListener("input", function () {
+            const searchText = searchInput.value.trim().toLowerCase();
 
             const filteredUsers = demoUsers.filter((user) =>
                 user.name.toLowerCase().includes(searchText) ||
@@ -47,7 +58,7 @@ async function startApp() {
         });
     } catch (error) {
         loadingMessage.textContent =
-            "Unable to load users. Please try again.";
+            "Unable to load users. Please refresh the page.";
 
         console.error("Something went wrong:", error);
     }
