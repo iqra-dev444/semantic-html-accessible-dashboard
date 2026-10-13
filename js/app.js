@@ -1,4 +1,3 @@
-
 async function startApp() {
     const usersList = document.getElementById("users-list");
     const loadingMessage = document.getElementById("loading-message");
@@ -17,12 +16,26 @@ async function startApp() {
         const savedUsers = localStorage.getItem("dashboardUsers");
 
         if (savedUsers) {
-            users = JSON.parse(savedUsers);
+            const parsedUsers = JSON.parse(savedUsers);
+
+            // Make sure saved data is an array of valid users
+            if (Array.isArray(parsedUsers)) {
+                users = parsedUsers.filter(
+                    (user) =>
+                        user &&
+                        typeof user.name === "string" &&
+                        typeof user.email === "string"
+                );
+            } else {
+                localStorage.removeItem("dashboardUsers");
+            }
         }
     } catch (error) {
         console.error("Could not read saved users:", error);
+        localStorage.removeItem("dashboardUsers");
     }
 
+    // Display, search and sort users
     function displayUsers() {
         const searchText = searchInput.value.trim().toLowerCase();
 
@@ -57,25 +70,38 @@ async function startApp() {
         });
     }
 
+    // Search and sorting event listeners
     searchInput.addEventListener("input", displayUsers);
     sortSelect.addEventListener("change", displayUsers);
 
-    // Show saved data immediately, if available
+    // Show saved users immediately, if available
     if (users.length > 0) {
         displayUsers();
     }
 
+    // Fetch fresh users from the API
     try {
         loadingMessage.textContent = "Loading users...";
 
         const apiUsers = await fetchUsers();
 
-        users = apiUsers.map((user) => ({
-            name: user.name,
-            email: user.email
-        }));
+        if (!Array.isArray(apiUsers)) {
+            throw new Error("API did not return a users array.");
+        }
 
-        // Save API users
+        users = apiUsers
+            .filter(
+                (user) =>
+                    user &&
+                    typeof user.name === "string" &&
+                    typeof user.email === "string"
+            )
+            .map((user) => ({
+                name: user.name,
+                email: user.email
+            }));
+
+        // Save API users to localStorage
         try {
             localStorage.setItem(
                 "dashboardUsers",
