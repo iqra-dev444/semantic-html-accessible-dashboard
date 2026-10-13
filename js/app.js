@@ -13,6 +13,7 @@ async function startApp() {
 
     // Load saved users from localStorage
     try {
+        localStorage.removeItem("dashboardUsers");
         const savedUsers = localStorage.getItem("dashboardUsers");
 
         if (savedUsers) {
