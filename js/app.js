@@ -15,21 +15,36 @@ const demoUsers = [
 async function startApp() {
     const usersList = document.getElementById("users-list");
     const loadingMessage = document.getElementById("loading-message");
+    const searchInput = document.getElementById("user-search");
 
     try {
         loadingMessage.textContent = "Loading users...";
 
-        const users = await fetchUsers();
+        await fetchUsers();
 
-        usersList.replaceChildren();
+        function displayUsers(users) {
+            usersList.replaceChildren();
 
-        demoUsers.forEach((user) => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${user.name} — ${user.email}`;
-            usersList.appendChild(listItem);
-        });
+            users.forEach((user) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${user.name} — ${user.email}`;
+                usersList.appendChild(listItem);
+            });
+        }
 
+        displayUsers(demoUsers);
         loadingMessage.textContent = "";
+
+        searchInput.addEventListener("input", () => {
+            const searchText = searchInput.value.toLowerCase();
+
+            const filteredUsers = demoUsers.filter((user) =>
+                user.name.toLowerCase().includes(searchText) ||
+                user.email.toLowerCase().includes(searchText)
+            );
+
+            displayUsers(filteredUsers);
+        });
     } catch (error) {
         loadingMessage.textContent =
             "Unable to load users. Please try again.";
