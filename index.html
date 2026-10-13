@@ -50,7 +50,12 @@
     <main id="main-content">
 
         <section id="users" aria-labelledby="users-heading">
-            <h2 id="users-heading">Users</h2>
+           <input
+                type="search"
+                id="user-search"
+                placeholder="Search by name or email..."
+                aria-label="Search users by name or email"
+            >
             <p id="loading-message" role="status">Loading users...</p>
             <ul id="users-list"></ul>
         </section>
